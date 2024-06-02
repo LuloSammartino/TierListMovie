@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 // Creamos una instancia de la aplicación Express
 const app = express();
 
-const options=(movie) => {
+const options= (movie) => {
     return {method: 'GET',
     url: 'https://imdb146.p.rapidapi.com/v1/find/',
     params: {query: `${movie}`},
@@ -17,7 +17,8 @@ const options=(movie) => {
     } }
 };
 
-app.get("/movie", async (req, res) =>{
+app.get("/?movie", async (req, res) =>{
+    
 
         let resultados = []
 
@@ -31,7 +32,7 @@ app.get("/movie", async (req, res) =>{
                     img: e.titlePosterImageModel.url
                 })
             });
-
+            res.header("Access-Control-Allow-Origin", "*")
             res.send(resultados)
 
         } catch (error) {
